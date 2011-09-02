@@ -1481,15 +1481,8 @@ VM.println("creating stack:");
      * @return the stack or null if none could be allocated
      */
     private static Object newStack(int size, VMThread owner, boolean userThread) {
-        Object stack = GC.getExcessiveGC() ? null : GC.newStack(size, owner);
-        if (stack == null) {
-            if (userThread) {
-                VM.collectGarbage(false);
-            } else {
-                GC.collectGarbage(false);
-            }
-            stack = GC.newStack(size, owner);
-        }
+        Assert.that(userThread == VMThread.currentThread().isServiceThread());
+        Object stack = GC.newStack(size, owner);
         stacksAllocatedCount++;
         if (size > maxStackSize) {
             maxStackSize = size;
