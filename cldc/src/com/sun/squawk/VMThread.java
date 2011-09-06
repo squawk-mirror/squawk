@@ -1472,12 +1472,12 @@ VM.println("creating stack:");
     }
     
     
-    private void threadGC(boolean userThread, boolean fullGC) {
+    private static void threadGC(boolean userThread, boolean fullGC) {
         if (userThread) {
-                VM.collectGarbage(fullGC);
-            } else {
-                GC.collectGarbage(fullGC);
-            }
+            VM.collectGarbage(fullGC);
+        } else {
+            GC.collectGarbage(fullGC);
+        }
     }
     
     /**
