@@ -1244,7 +1244,7 @@ public class GC implements GlobalStaticFields {
      */
     static Object newStack(int length, VMThread owner) {
         int size = roundUpToWord(HDR.arrayHeaderSize + (length * HDR.BYTES_PER_WORD));
-        Object stack = allocate(size, Klass.LOCAL_ARRAY, length);
+        Object stack = allocatePrim(size, Klass.LOCAL_ARRAY, length);
         if (stack != null) {
             NativeUnsafe.setObject(stack, SC.owner, owner);
             collector.registerStackChunks(stack);
