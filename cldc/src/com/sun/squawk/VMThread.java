@@ -178,6 +178,7 @@ public final class VMThread implements GlobalStaticFields {
      * The maximum priority that a system thread can have.
      */
     public final static int MAX_SYS_PRIORITY = 12;
+    public final static int REAL_MAX_SYS_PRIORITY = 14;
     
     /**
      * Return the number of Thread objects allocated during the lifetime of this JVM.
@@ -465,7 +466,7 @@ public final class VMThread implements GlobalStaticFields {
      * @see        java.lang.Thread#MIN_PRIORITY
      */
     public final void setSystemPriority(int newPriority) {
-        if (newPriority > MAX_SYS_PRIORITY || newPriority < MIN_PRIORITY) {
+        if (newPriority > REAL_MAX_SYS_PRIORITY || newPriority < MIN_PRIORITY) {
             throw new IllegalArgumentException();
         }
         priority = (byte)newPriority;
